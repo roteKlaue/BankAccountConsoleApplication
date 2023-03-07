@@ -1,6 +1,7 @@
 package at.rote.klaue.gui;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class GUI {
@@ -75,9 +76,54 @@ public class GUI {
         }
     }
 
+    public static void printNumberList(List<String> args) {
+        printNumberedList(args.toArray(new String[0]));
+    }
+
     public static void printList(String ...args) {
         for (String arg : args) {
             System.out.printf(" • %s\n", arg);
         }
+    }
+
+    public static void printList(List<String> args) {
+        printList(args.toArray(new String[0]));
+    }
+
+    /***
+     * @unfinished
+     * @since 2023-03-07
+     * */
+    public static void printTable(String[][] table) {
+        int[] temp = new int[table[0].length];
+
+        for (int i = 0; i < table[0].length; i++) {
+            for (int i1 = 0; i1 < table[i].length; i1++) {
+                if(table[i][i1].length() > temp[i1]) {
+                    temp[i1] = table[i][i1].length();
+                }
+            }
+        }
+
+        StringBuilder startEnd = new StringBuilder("+");
+        for (int length:temp) {
+            startEnd.append("-".repeat(length + 2)).append("+");
+        }
+
+        String[] constructs = new String[temp.length];
+        for (int i = 0; i < constructs.length; i++) {
+            constructs[i] = "%s %-" + temp[i] +  "s |";
+        }
+
+
+        for (String[] strings : table) {
+            System.out.println(startEnd);
+            String outPut = "|";
+            for (int i1 = 0; i1 < strings.length; i1++) {
+                outPut = String.format(constructs[i1], outPut, strings[i1]);
+            }
+            System.out.println(outPut);
+        }
+        System.out.println(startEnd);
     }
 }

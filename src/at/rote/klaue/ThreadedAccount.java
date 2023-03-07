@@ -29,7 +29,7 @@ public class ThreadedAccount implements Runnable {
     public final void run() {
         for (int i = iterations; i > 0; i--) {
             synchronized (bankAccount) {
-                int value = RANDOM.nextInt(100)-50;
+                int value = RANDOM.nextInt(-50, 51);
                 System.out.printf("%s wants to withdraw %d€\n", name, value);
                 LocalTime time = LocalTime.now();
                 while (bankAccount.isNegative(value)) {
@@ -46,13 +46,13 @@ public class ThreadedAccount implements Runnable {
                 }
             }
             try {
-                Thread.sleep(RANDOM.nextInt(1000));
+                Thread.sleep(RANDOM.nextInt(1, 1001));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        System.out.printf("Simulation finished for %s.\s", name);
+        System.out.printf("Simulation finished for %s.\n", name);
     }
 }
 

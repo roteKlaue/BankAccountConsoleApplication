@@ -12,5 +12,7 @@ public class Test {
     public static void main(String[] args) {
         GUI.printNumberedList("hello", "why", "java");
         GUI.printList("hello", "why", "java");
+
+        GUI.printTable(new String[][]{{"Raphael", "Bader"}, {"Jan", "Köck"}, {"Jonas", "Koch"}, {"Floarian", "Schwarzel"}});
     }
 }
