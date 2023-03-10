@@ -5,6 +5,8 @@ import at.rote.klaue.gui.Color;
 import at.rote.klaue.gui.GUI;
 import at.rote.klaue.gui.Option;
 
+import java.util.List;
+
 public class Account implements Callback {
     /***
      *    ___________            __         .__  __
@@ -15,24 +17,19 @@ public class Account implements Callback {
      *         \/                         \/              \/
      */
     private final String name;
-    private final Option[] allOptions;
+    private final List<Option> allOptions;
     private boolean selected = false;
     private Option myOption;
 
-    public Account(String name, Option[] options) {
+    public Account(String name, List<Option> options) {
         this.name = name;
-        allOptions = options;
-    }
-
-    public Account(String name, Option[] options, boolean selected) {
-        this.name = name;
-        this.selected = selected;
         allOptions = options;
     }
 
     public void setMyOption(Option myOption) {
         this.myOption = myOption;
     }
+
 
     public String getName() {
         return name;
@@ -46,6 +43,6 @@ public class Account implements Callback {
     public void run() {
         selected = !selected;
         myOption.setColor(selected? Color.ANSI_PURPLE_BACKGROUND: Color.ANSI_RESET);
-        GUI.printMenu("Who should be involved?", allOptions);
+        GUI.printMenu("Who should be involved?", allOptions.toArray(Option[]::new));
     }
 }

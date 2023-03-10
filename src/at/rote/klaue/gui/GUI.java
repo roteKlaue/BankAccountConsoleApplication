@@ -1,5 +1,6 @@
 package at.rote.klaue.gui;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -39,24 +40,12 @@ public class GUI {
 
         final String construct = "| %s%-" + longest + "s%s  ... (%" + (options.length > 9? "02": "") + "d) |\n";
 
-        clearConsole();
-        print(construct, prompt, longest, options);
-
         int selected;
 
         do {
-            try {
-                selected = SC.nextInt();
-            } catch (InputMismatchException ex) {
-                SC.next();
-                selected = -2147483648;
-            }
-
-            if(selected < 1 || selected > options.length) {
-                clearConsole();
-                System.out.println("Invalid selection!");
-                print(construct, prompt, longest, options);
-            }
+            clearConsole();
+            print(construct, prompt, longest, options);
+            selected = promptInt("");
         } while (selected < 1 || selected > options.length);
 
         options[selected - 1].run().run();
@@ -125,5 +114,27 @@ public class GUI {
             System.out.println(outPut);
         }
         System.out.println(startEnd);
+    }
+
+    public static int promptInt(String prompt) {
+        Integer res = null;
+        do {
+            try {
+                System.out.print(prompt);
+                res = SC.nextInt();
+            } catch (InputMismatchException ex) {
+                SC.next();
+            }
+        } while (res == null);
+        return res;
+    }
+
+    public static String promptString(String prompt){
+        System.out.print(prompt);
+        String res;
+        do {
+            res = SC.next();
+        } while (res == null || res.equals(""));
+        return res;
     }
 }

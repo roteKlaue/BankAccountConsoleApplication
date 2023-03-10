@@ -13,6 +13,6 @@ public class Test {
         GUI.printNumberedList("hello", "why", "java");
         GUI.printList("hello", "why", "java");
 
-        GUI.printTable(new String[][]{{"Raphael", "Bader"}, {"Jan", "Köck"}, {"Jonas", "Koch"}, {"Floarian", "Schwarzel"}});
+        System.out.println(GUI.promptInt("Test: "));
     }
 }

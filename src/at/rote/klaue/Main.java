@@ -5,7 +5,6 @@ import at.rote.klaue.gui.Option;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     /***
@@ -16,45 +15,58 @@ public class Main {
      *     \___  / \____/|__|   |__| |___|  /__||__|  \___  >
      *         \/                         \/              \/
      */
-    private static final Scanner SCANNER = new Scanner(System.in);
-
     public static void main(String[] args) {
-        Account[] accounts = new Account[4];
-        Option[] options = new Option[accounts.length + 1];
+        List<Option> options = new ArrayList<>();
+        List<Account> accounts = new ArrayList<>(List.of(new Account("Jan", options),
+                new Account("Jonas", options),
+                new Account("Raphael", options),
+                new Account("Moritz", options)));
 
-        accounts[0] = new Account("Jan", options);
-        accounts[1] = new Account("Jonas", options);
-        accounts[2] = new Account("Raphael", options);
-        accounts[3] = new Account("Moritz", options);
-
-        for (int i = 0; i < accounts.length; i++) {
-            options[i] = new Option(accounts[i].getName(), accounts[i]);
-            accounts[i].setMyOption(options[i]);
+        for (int i = 0; i < accounts.size(); i++) {
+            options.add(i, new Option(accounts.get(i).getName(), accounts.get(i)));
+            accounts.get(i).setMyOption(options.get(i));
         }
 
-        options[options.length - 1] = new Option("Done", () -> {
-            BankAccount bankAccount = new BankAccount(50);
-            List<ThreadedAccount> threadedAccounts = new ArrayList<>();
-            for (Account ac:accounts) {
-                if(ac.getSelected()) {
-                    threadedAccounts.add(new ThreadedAccount(ac.getName(), bankAccount));
-                }
+        options.add(options.size(), new Option("Add User", () -> {
+            accounts.add(new Account(GUI.promptString("Users name: "), options));
+            options.add(accounts.size() - 1, new Option(accounts.get(accounts.size() - 1).getName(), accounts.get(accounts.size() - 1)));
+            accounts.get(accounts.size() - 1).setMyOption(options.get(accounts.size() - 1));
+            GUI.printMenu("Who should be involved?", options.toArray(Option[]::new));
+        }));
+
+        options.add(options.size(), new Option("Remove User", () -> {
+            if(accounts.size() == 0) {
+                GUI.printMenu("Who should be involved?", options.toArray(Option[]::new));
+                return;
             }
 
+            int user;
+            do {
+                user = GUI.promptInt("Which user should be removed? ");
+            } while (user < 1 || user > accounts.size());
+
+            accounts.remove(user - 1);
+            options.remove(user - 1);
+            GUI.printMenu("Who should be involved?", options.toArray(Option[]::new));
+        }));
+
+
+        options.add(options.size(), new Option("Done", () -> {
+            BankAccount bankAccount = new BankAccount(50);
+            List<ThreadedAccount> threadedAccounts = accounts.stream()
+                    .filter(Account::getSelected)
+                    .map((acc) -> new ThreadedAccount(acc.getName(), bankAccount))
+                    .toList();
 
             int amount;
             do {
-                System.out.println("Set the number of iterations: ");
-                amount = SCANNER.nextInt();
+                amount = GUI.promptInt("Set the number of iterations: ");
             } while (amount < 1);
 
             ThreadedAccount.setIterations(amount);
+            threadedAccounts.forEach((acc) -> new Thread(acc).start());
+        }));
 
-            for (ThreadedAccount threadedAccount : threadedAccounts) {
-                new Thread(threadedAccount).start();
-            }
-        });
-
-        GUI.printMenu("Who should be involved?", options);
+        GUI.printMenu("Who should be involved?", options.toArray(Option[]::new));
     }
 }
