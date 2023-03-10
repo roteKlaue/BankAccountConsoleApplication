@@ -63,7 +63,7 @@ public class Main {
                 amount = GUI.promptInt("Set the number of iterations: ");
             } while (amount < 1);
 
-            ThreadedAccount.setIterations(amount);
+            Config.getInstance().setIteration(amount);
             threadedAccounts.forEach((acc) -> new Thread(acc).start());
         }));
 

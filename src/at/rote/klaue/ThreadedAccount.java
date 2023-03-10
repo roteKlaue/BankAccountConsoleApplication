@@ -13,7 +13,6 @@ public class ThreadedAccount implements Runnable {
      *         \/                         \/              \/
      */
     private static final Random RANDOM = new Random();
-    private static int iterations = 20;
     private final String name;
     private final BankAccount bankAccount;
 
@@ -21,13 +20,10 @@ public class ThreadedAccount implements Runnable {
         this.name = name;
         this.bankAccount = bankAccount;
     }
-    public static void setIterations(int iterations) {
-        ThreadedAccount.iterations = iterations;
-    }
 
     @Override
     public final void run() {
-        for (int i = iterations; i > 0; i--) {
+        for (int i = Config.getInstance().getIteration(); i > 0; i--) {
             synchronized (bankAccount) {
                 int value = RANDOM.nextInt(-50, 51);
                 System.out.printf("%s wants to withdraw %d€\n", name, value);
