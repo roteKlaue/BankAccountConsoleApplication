@@ -3,6 +3,14 @@ package at.rote.klaue;
 import java.util.List;
 
 public class Config {
+    /**
+     *    ___________            __         .__  __
+     *    \_   _____/___________/  |_  ____ |__|/  |_  ____
+     *     |    __)/  _ \_  __ \   __\/    \|  \   __\/ __ \
+     *     |     \(  <_> )  | \/|  | |   |  \  ||  | \  ___/
+     *     \___  / \____/|__|   |__| |___|  /__||__|  \___  >
+     *         \/                         \/              \/
+     */
     private static final Config instance = new Config();
     private int iteration = 10;
     private boolean running = false;

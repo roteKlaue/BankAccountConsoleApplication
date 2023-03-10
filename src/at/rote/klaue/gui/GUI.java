@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GUI {
-    /***
+    /**
      *    ___________            __         .__  __
      *    \_   _____/___________/  |_  ____ |__|/  |_  ____
      *     |    __)/  _ \_  __ \   __\/    \|  \   __\/ __ \

@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.util.Random;
 
 public class ThreadedAccount implements Runnable {
-    /***
+    /**
      *    ___________            __         .__  __
      *    \_   _____/___________/  |_  ____ |__|/  |_  ____
      *     |    __)/  _ \_  __ \   __\/    \|  \   __\/ __ \

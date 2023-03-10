@@ -1,7 +1,7 @@
 package at.rote.klaue.gui;
 
 public class Option implements Runnable {
-    /***
+    /**
      *    ___________            __         .__  __
      *    \_   _____/___________/  |_  ____ |__|/  |_  ____
      *     |    __)/  _ \_  __ \   __\/    \|  \   __\/ __ \
