@@ -30,7 +30,6 @@ public class Account implements Callback {
         this.myOption = myOption;
     }
 
-
     public String getName() {
         return name;
     }

@@ -49,6 +49,10 @@ public class ThreadedAccount implements Runnable {
         }
 
         System.out.printf("Simulation finished for %s.\n", name);
+
+        if(Config.getInstance().getThreads().stream().filter(Thread::isAlive).toList().size() == 1) {
+            Config.getInstance().setRunning(false);
+        }
     }
 }
 

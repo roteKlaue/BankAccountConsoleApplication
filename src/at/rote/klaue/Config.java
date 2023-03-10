@@ -1,8 +1,13 @@
 package at.rote.klaue;
 
+import java.util.List;
+
 public class Config {
     private static final Config instance = new Config();
     private int iteration = 10;
+    private boolean running = false;
+    private List<Thread> threads;
+    private boolean exit = true;
 
     private Config() {}
 
@@ -12,6 +17,30 @@ public class Config {
 
     public int getIteration() {
         return iteration;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public boolean isExit() {
+        return exit;
+    }
+
+    public void setExit(boolean exit) {
+        this.exit = exit;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public void setThreads(List<Thread> threads) {
+        this.threads = threads;
+    }
+
+    public List<Thread> getThreads() {
+        return threads;
     }
 
     public static Config getInstance() {

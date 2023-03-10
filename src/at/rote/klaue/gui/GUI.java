@@ -136,4 +136,7 @@ public class GUI {
         } while (res == null || res.equals(""));
         return res;
     }
+
+    public static void main(String[] args) {
+    }
 }
