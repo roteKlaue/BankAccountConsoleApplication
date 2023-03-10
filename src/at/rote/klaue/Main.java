@@ -3,7 +3,6 @@ package at.rote.klaue;
 import at.rote.klaue.gui.GUI;
 import at.rote.klaue.gui.Option;
 
-import java.io.ObjectInputFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,9 +24,7 @@ public class Main {
                 new Account("Moritz", options)));
 
         List<Option> mainMenu = new ArrayList<>();
-        Collections.addAll(mainMenu, List.of(new Option("Start Simulation", () -> {
-                    GUI.printMenu("Who should be involved?", options.toArray(Option[]::new));
-                }),
+        Collections.addAll(mainMenu, List.of(new Option("Start Simulation", () -> GUI.printMenu("Who should be involved?", options.toArray(Option[]::new))),
                 new Option("List Users", () -> {
                     GUI.printList(accounts.stream().map(Account::getName).toArray(String[]::new));
                     try {

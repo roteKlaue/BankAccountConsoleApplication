@@ -1,6 +1,6 @@
 package at.rote.klaue.gui;
 
-public class Option {
+public class Option implements Runnable {
     /***
      *    ___________            __         .__  __
      *    \_   _____/___________/  |_  ____ |__|/  |_  ____
@@ -30,7 +30,12 @@ public class Option {
         return clr;
     }
 
-    public Callback run() {
+    public Callback getCb() {
         return cb;
+    }
+
+    @Override
+    public void run() {
+        cb.run();
     }
 }

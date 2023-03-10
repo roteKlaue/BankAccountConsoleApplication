@@ -47,7 +47,7 @@ public class GUI {
             selected = promptInt("");
         } while (selected < 1 || selected > options.length);
 
-        options[selected - 1].run().run();
+        options[selected - 1].getCb().run();
     }
 
     public static void printNumberedList(String ...args) {
